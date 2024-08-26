@@ -108,3 +108,38 @@ const maxlength = 9;
 console.log(findLongStrings(array,length)); // 5 ["Cherry", "Watermelon", "Apricot", "Raspberry", "Avocado"]
 console.log(findLongStrings(array,minLength)); // 4 ["Watermelon", "Apricot", "Raspberry", "Avocado"]
 console.log(findLongStrings(array,maxlength)); // ["Watermelon"]
+
+//======================================================================================
+
+// //Part 2: Thinking Methodically
+
+// When functions are built into objects, like Arrays, they are referred to as “methods” of those objects. Many methods, including Array methods, require “callback functions” to determine their behavior.
+// For the tasks below, use the following data to test your work:
+
+const data = [
+  { id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+  { id: "48", name: "Barry", occupation: "Runner", age: "25" },
+  { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+  { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+  { id: "7", name: "Bilbo", occupation: "None", age: "111" }]
+
+// Use callback functions alongside Array methods to accomplish the following:
+// Sort the array by age.
+
+function compareAge (a, b) { // sort array by property name
+  return a.age - b.age;
+}
+console.log(data.sort(compareAge)); // the sort() method is use to sort an array element by the age property.
+
+
+// Filter the array to remove entries with an age greater than 50.
+
+const filterData = data.filter(person => parseInt(person.age) <= 50)
+
+console.log(filterData);
+
+// Map the array to change the “occupation” key to “job” and increment every age by 1.
+
+
+// Use the reduce method to calculate the sum of the ages.
+// Then use the result to calculate the average age.
