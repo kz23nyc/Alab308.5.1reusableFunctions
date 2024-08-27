@@ -109,6 +109,7 @@ console.log(findLongStrings(array,length)); // 5 ["Cherry", "Watermelon", "Apric
 console.log(findLongStrings(array,minLength)); // 4 ["Watermelon", "Apricot", "Raspberry", "Avocado"]
 console.log(findLongStrings(array,maxlength)); // ["Watermelon"]
 
+
 //======================================================================================
 
 // //Part 2: Thinking Methodically
@@ -121,25 +122,50 @@ const data = [
   { id: "48", name: "Barry", occupation: "Runner", age: "25" },
   { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
   { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
-  { id: "7", name: "Bilbo", occupation: "None", age: "111" }]
+  { id: "7", name: "Bilbo", occupation: "None", age: "111" }];
 
 // Use callback functions alongside Array methods to accomplish the following:
-// Sort the array by age.
+// Sort the array by age. 
 
-function compareAge (a, b) { // sort array by property name
-  return a.age - b.age;
-}
-console.log(data.sort(compareAge)); // the sort() method is use to sort an array element by the age property.
+const sortedByAge = data.slice().sort((a, b) => parseInt(a.age) - parseInt(b.age));
+console.log(sortedByAge);
+
+// Use the sort method to sort the array by age in ascending order.
+// The slice method is used to create a shallow copy of the array to avoid mutating the original array.
 
 
 // Filter the array to remove entries with an age greater than 50.
 
-const filterData = data.filter(person => parseInt(person.age) <= 50)
+const filteredByAge = sortedByAge.filter(person => parseInt(person.age) <= 50);
+console.log(filteredByAge);
 
-console.log(filterData);
+// Use the filter methodto create a new array with individuals older than 50.The callback function checks if the age of each person is greater than 50.
+
 
 // Map the array to change the “occupation” key to “job” and increment every age by 1.
+const mappedArray = filteredByAge.map(person => ({
+  id: person.id,
+  name: person.name,
+  job: person.occupation,
+  age: (parseInt(person.age) + 1).toString()
+}));
+console.log(mappedArray);
 
+// Use the map() method to create a new array Creates a new array with the result of calling a function for each array element. The callback function returns a new object with the updated keys and values.
 
 // Use the reduce method to calculate the sum of the ages.
+const totalAge = mappedArray.reduce((sum, person) => sum + parseInt(person.age), 0);
+console.log(totalAge);
+
+// reduce () method is used to reduce the array to a single value.
+// (sum, person), sum is the accumulator that stores the accumulated result, person is the current element being processed in he array.
+// parseInt(person.age) converts the age property of the current person objectfrom a string to a number.
+// sum + parseInt(person.age) adds the converted age to the accumulator sum.
+// The initial value 0 is provided as the second argument to reduce(), which means the accumulation starts from 0.
+
+const averageAge = totalAge / mappedArray.length;
+console.log(averageAge);
+// Calculate the average age by dividing the total age by the length of the mapped array.
+
+
 // Then use the result to calculate the average age.
