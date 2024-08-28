@@ -127,18 +127,15 @@ const data = [
 // Use callback functions alongside Array methods to accomplish the following:
 // Sort the array by age. 
 
-const sortedByAge = data.slice().sort((a, b) => parseInt(a.age) - parseInt(b.age));
-console.log(sortedByAge);
-
-// Use the sort method to sort the array by age in ascending order.
-// The slice method is used to create a shallow copy of the array to avoid mutating the original array.
+data.sort((a, b) => parseInt(a.age) - parseInt(b.age));
+console.log(data);
+// Use the callback function to sort the array by age
 
 
 // Filter the array to remove entries with an age greater than 50.
 
-const filteredByAge = sortedByAge.filter(person => parseInt(person.age) <= 50);
+const filteredByAge = data.filter(person => parseInt(person.age) <= 50);
 console.log(filteredByAge);
-
 // Use the filter methodto create a new array with individuals older than 50.The callback function checks if the age of each person is greater than 50.
 
 
@@ -166,6 +163,51 @@ console.log(totalAge);
 const averageAge = totalAge / mappedArray.length;
 console.log(averageAge);
 // Calculate the average age by dividing the total age by the length of the mapped array.
-
-
 // Then use the result to calculate the average age.
+
+
+//============ Part 3 Thinking Critically ==============================================================
+
+// For this section, develop functions that accomplish the following:
+// Take an object and increment its age field.
+
+ function incrementAge(person) {
+  person.age = parseInt(person.age) + 1; // Convert age to number and increment
+  return person;
+}
+
+ 
+// Take an object, make a copy, and increment the age field of the copy. Return the copy.
+
+function incrementAge(person) {
+  const copy = {...person}; //creates a copy of the input person object using the spread operator (...)
+  copy.age = parseInt(copy.age || 0) + 1; // converts to an integer with property to 0
+  copy.updated_at = new Date(); //adds a updated_at property with the current time using new Date()
+  return copy;
+}
+
+const updatedPerson = incrementAge(data[0]);
+console.log(updatedPerson);
+
+// For each of the functions above, if the object does not yet contain an age field, create one and set it to 0. Also, add (or modify, as appropriate) an updated_at field that stores a Date object with the current time.
+// Thought experiment: since the Date object is an object, what would happen if we modified it in the copy of the object created in the second function using setTime() or another method? How could we circumvent potentially undesired behavior?
+
+
+function incrementAgecopy(obj) {
+  const copy = Object.assign({}, obj) 
+  //creates a shallow copy of the obj object using Object.assign. The new object copy has the same properties as obj.
+  if (!copy.hasOwnProperty('age')) { 
+    copy.age = 0; 
+    //checks if the copy object has its own age property using hasOwnProperty. If the age property does not exit, it is intialized to ).
+  } 
+  copy.age += 1; //increments the age property of the copy object by 1.
+  copy.updated_at = new Date(); //sets the updated_at property of the copy object to the current date and time using new Date().
+  return copy;
+}
+
+
+
+
+
+
+
